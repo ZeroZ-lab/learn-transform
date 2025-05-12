@@ -1,0 +1,173 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Ruff Usage Guide
+
+Ruff 是一个快速的 Python linter，用 Rust 编写，可以替代多个 Python 工具。本指南详细说明如何在项目中使用 Ruff。
+
+## 基本配置
+
+当前项目在 `pyproject.toml` 中的 Ruff 配置：
+```toml
+[tool.ruff]
+line-length = 88
+target-version = "py39"
+select = ["E", "F", "B", "I"]
+ignore = []
+```
+
+## 常用命令
+
+1. **检查代码**
+   ```bash
+   # 检查所有 Python 文件
+   ruff check .
+
+   # 检查特定文件
+   ruff check path/to/file.py
+
+   # 检查特定目录
+   ruff check path/to/directory/
+   ```
+
+2. **自动修复**
+   ```bash
+   # 自动修复所有可修复的问题
+   ruff check --fix .
+
+   # 修复特定文件
+   ruff check --fix path/to/file.py
+   ```
+
+3. **显示规则说明**
+   ```bash
+   # 显示所有启用的规则
+   ruff rule --all
+
+   # 显示特定规则的说明
+   ruff rule E501
+   ```
+
+## 规则说明
+
+当前启用的规则集：
+- `E`: pycodestyle 错误
+- `F`: pyflakes 错误
+- `B`: flake8-bugbear 错误
+- `I`: isort 导入排序
+
+### 常用规则示例
+
+1. **导入排序 (I)**
+   ```python
+   # 错误示例
+   import os
+   from typing import List
+   import sys
+
+   # 正确示例
+   import os
+   import sys
+   from typing import List
+   ```
+
+2. **未使用的导入 (F401)**
+   ```python
+   # 错误示例
+   import os  # 未使用
+   import sys
+
+   # 正确示例
+   import sys
+   ```
+
+3. **行长度 (E501)**
+   ```python
+   # 错误示例
+   very_long_variable_name = "This is a very long string that exceeds the maximum line length of 88 characters"
+
+   # 正确示例
+   very_long_variable_name = (
+       "This is a very long string that is properly formatted "
+       "to stay within the line length limit"
+   )
+   ```
+
+## 最佳实践
+
+1. **在开发过程中使用**
+   - 在编写代码时定期运行 Ruff
+   - 使用 `--fix` 选项自动修复简单问题
+   - 将 Ruff 集成到你的编辑器中
+
+2. **在 CI/CD 中使用**
+   ```yaml
+   # 示例 GitHub Actions 配置
+   - name: Run Ruff
+     run: |
+       pip install ruff
+       ruff check .
+   ```
+
+3. **与 pre-commit 集成**
+   ```yaml
+   # .pre-commit-config.yaml
+   - repo: https://github.com/astral-sh/ruff-pre-commit
+     rev: v0.1.0
+     hooks:
+       - id: ruff
+         args: [--fix]
+       - id: ruff-format
+   ```
+
+## 常见问题解决
+
+1. **忽略特定行**
+   ```python
+   # 忽略下一行
+   import os  # noqa: F401
+
+   # 忽略特定规则
+   very_long_line = "..."  # noqa: E501
+
+   # 忽略多个规则
+   import os  # noqa: F401, E501
+   ```
+
+2. **忽略整个文件**
+   ```python
+   # 在文件开头添加
+   # ruff: noqa
+   ```
+
+3. **忽略特定目录**
+   ```toml
+   # pyproject.toml
+   [tool.ruff]
+   exclude = [
+       "build/",
+       "dist/",
+       "*.pyc",
+   ]
+   ```
+
+## 性能优化
+
+1. **使用缓存**
+   - Ruff 默认启用缓存
+   - 缓存位置：`.ruff_cache/`
+
+2. **并行处理**
+   - Ruff 默认使用多核处理
+   - 可以通过 `--jobs` 参数控制并行度
+
+3. **选择性检查**
+   ```bash
+   # 只检查特定规则
+   ruff check --select E501,F401 .
+
+   # 排除特定规则
+   ruff check --ignore E501,F401 .
+   ```

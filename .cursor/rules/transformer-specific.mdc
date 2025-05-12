@@ -1,0 +1,77 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Transformer-Specific Guidelines
+
+This document provides specific guidelines for working with the Hugging Face Transformers library in this project.
+
+## Model Architecture
+
+- Use standard transformer architectures from Hugging Face
+- Follow the model configuration patterns in `src/models/`
+- Keep model implementations modular and extensible
+
+## Best Practices
+
+1. **Model Loading**
+   - Use `AutoModel` and `AutoTokenizer` for flexibility
+   - Cache models and tokenizers when possible
+   - Handle model loading errors gracefully
+
+2. **Tokenization**
+   - Use appropriate tokenizer for each model
+   - Handle special tokens correctly
+   - Consider sequence length limits
+
+3. **Training**
+   - Use `Trainer` class for training
+   - Implement proper data collation
+   - Monitor training metrics
+   - Save checkpoints regularly
+
+4. **Inference**
+   - Implement proper batching
+   - Handle model outputs correctly
+   - Consider memory usage
+   - Implement proper error handling
+
+## Common Patterns
+
+```python
+# Model loading
+from transformers import AutoModel, AutoTokenizer
+
+model = AutoModel.from_pretrained("model_name")
+tokenizer = AutoTokenizer.from_pretrained("model_name")
+
+# Tokenization
+inputs = tokenizer(text, return_tensors="pt", padding=True, truncation=True)
+
+# Inference
+outputs = model(**inputs)
+```
+
+## Performance Considerations
+
+- Use appropriate batch sizes
+- Enable model optimization when possible
+- Monitor memory usage
+- Use appropriate hardware (CPU/GPU)
+
+## Testing
+
+- Test model loading and initialization
+- Test tokenization pipeline
+- Test inference pipeline
+- Test error handling
+- Test performance metrics
+
+## Documentation
+
+- Document model architecture
+- Document training parameters
+- Document inference parameters
+- Document performance characteristics
+- Document memory requirements

@@ -1,0 +1,51 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Project Structure Guide
+
+This project follows a standard Python package structure with modern development tools and practices.
+
+## Key Directories and Files
+
+- `src/` - Main source code directory
+  - Contains all the Python modules and packages
+  - Entry point for the application
+
+- `tests/` - Test directory
+  - Contains all test files
+  - Follows pytest conventions with `test_*.py` naming
+
+- `pyproject.toml` - Project configuration
+  - Defines project metadata
+  - Manages dependencies
+  - Configures development tools
+
+## Development Tools Configuration
+
+The project uses several development tools configured in `pyproject.toml`:
+
+- **Code Formatting**
+  - Black (line length: 88)
+  - isort (compatible with Black)
+
+- **Type Checking**
+  - mypy (strict mode enabled)
+  - Python 3.9+ required
+
+- **Linting**
+  - flake8
+  - ruff (with E, F, B, I rules)
+
+- **Testing**
+  - pytest with coverage reporting
+  - Test files in `tests/` directory
+
+## Dependencies
+
+Main dependencies:
+- torch >= 2.1.0
+- transformers >= 4.36.0
+
+Development dependencies are managed through optional dependencies in `pyproject.toml`.

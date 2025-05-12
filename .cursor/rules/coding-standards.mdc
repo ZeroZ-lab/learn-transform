@@ -1,0 +1,66 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Coding Standards
+
+This project follows strict coding standards to maintain code quality and consistency.
+
+## Code Style
+
+- **Line Length**: Maximum 88 characters (Black standard)
+- **Indentation**: 4 spaces
+- **String Quotes**: Double quotes for strings
+- **Imports**: Sorted and grouped using isort
+  - Standard library imports first
+  - Third-party imports second
+  - Local application imports last
+
+## Type Hints
+
+- All functions must have type hints
+- Use `typing` module for complex types
+- No `Any` types allowed (mypy configuration)
+- Return types must be explicitly specified
+
+## Documentation
+
+- All modules should have docstrings
+- All functions and classes must have docstrings
+- Use Google style docstrings
+- Include type information in docstrings
+
+## Testing
+
+- Write tests for all new features
+- Maintain minimum 80% code coverage
+- Use pytest fixtures for test setup
+- Name test files as `test_*.py`
+- Name test functions as `test_*`
+
+## Code Quality
+
+- No unused imports
+- No unused variables
+- No duplicate code
+- Follow SOLID principles
+- Keep functions small and focused
+
+## Git Commit Messages
+
+- Use present tense
+- Start with a verb
+- Keep first line under 50 characters
+- Use body for detailed explanation
+- Reference issue numbers if applicable
+
+Example commit message:
+```
+feat: add transformer model implementation
+
+- Implement base transformer architecture
+- Add attention mechanism
+- Add unit tests for core functionality
+
+Closes #123

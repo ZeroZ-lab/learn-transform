@@ -1,0 +1,88 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Development Workflow
+
+This document outlines the development workflow and best practices for this project.
+
+## Setup Development Environment
+
+1. Create and activate virtual environment:
+   ```bash
+   python -m venv .venv
+   source .venv/bin/activate  # Linux/Mac
+   # or
+   .venv\Scripts\activate  # Windows
+   ```
+
+2. Install development dependencies:
+   ```bash
+   pip install -e ".[dev]"
+   ```
+
+3. Install pre-commit hooks:
+   ```bash
+   pre-commit install
+   ```
+
+## Development Process
+
+1. **Create Feature Branch**
+   - Branch from `main`
+   - Use feature branch naming: `feature/description`
+
+2. **Development**
+   - Write code following coding standards
+   - Add tests for new features
+   - Run tests locally: `pytest`
+   - Check code style: `black .` and `isort .`
+   - Run type checking: `mypy src`
+
+3. **Code Review**
+   - Self-review changes
+   - Run all tests and checks
+   - Create pull request
+   - Address review comments
+
+4. **Merge**
+   - Squash commits if necessary
+   - Merge to main branch
+   - Delete feature branch
+
+## Testing
+
+- Run all tests: `pytest`
+- Run with coverage: `pytest --cov=src`
+- Run specific test: `pytest tests/test_file.py::test_function`
+
+## Code Quality Checks
+
+- Format code: `black .`
+- Sort imports: `isort .`
+- Type checking: `mypy src`
+- Linting: `ruff check .`
+
+## Pre-commit Hooks
+
+The following checks run automatically on commit:
+- Black formatting
+- isort import sorting
+- flake8 linting
+- mypy type checking
+- ruff checks
+
+## Version Control
+
+- Use meaningful commit messages
+- Keep commits focused and atomic
+- Reference issues in commit messages
+- Use conventional commit format
+
+## Documentation
+
+- Update README.md for major changes
+- Keep docstrings up to date
+- Document new features
+- Update type hints
